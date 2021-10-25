@@ -1,7 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:guidance_and_counselling/components/AppTittle.dart';
 import 'package:guidance_and_counselling/components/TabLabel.dart';
 
 class GenderScreen extends StatefulWidget {
@@ -14,10 +11,8 @@ class _GenderScreenState extends State<GenderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppTitle(),
-        centerTitle: true,
+        backgroundColor: Colors.green,
       ),
-      backgroundColor: Colors.teal,
       body: SingleChildScrollView(
         child: Column(
           children: [

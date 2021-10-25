@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:guidance_and_counselling/components/ReusableCard.dart';
 import 'package:guidance_and_counselling/components/ReusableCardContent.dart';
-import 'package:guidance_and_counselling/screens/CouncillorsScreen.dart';
-import 'package:guidance_and_counselling/screens/GenderScreen.dart';
-import 'package:guidance_and_counselling/screens/HealthStaffScreen.dart';
+import 'package:guidance_and_counselling/screens/councillors_screen.dart';
+import 'package:guidance_and_counselling/screens/gender_screen.dart';
+import 'package:guidance_and_counselling/screens/health_staff_screen.dart';
 import 'package:guidance_and_counselling/components/TabLabel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
           ),
           timelyUpdates(),
           TabLabel(
-            label: 'What service do you need ?',
+            label: 'What category of counsellors do you need ?',
             color: Colors.orange,
             align: Alignment.center,
           ),
@@ -37,15 +37,16 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: ReusableCard(
                         cardChild: ReusableCardContent(
-                          icon: Icons.group_outlined,
-                          label: 'Counsellors',
+                          icon: Icons.cast_for_education_rounded,
+                          label: 'Career Counsellors',
                         ),
                         action: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   CouncillorsScreen(),
                             ),
+                            (Route<dynamic> route) => true,
                           );
                         },
                       ),
@@ -53,19 +54,20 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: ReusableCard(
                         cardChild: ReusableCardContent(
-                          icon: Icons.local_hospital_rounded,
-                          label: 'Health Staff',
+                          icon: Icons.volunteer_activism,
+                          label: 'Vocation Guidance Counsellors',
                         ),
                         action: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   HealthStaffScreen(),
                             ),
+                            (Route<dynamic> route) => true,
                           );
                         },
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -77,15 +79,31 @@ class _HomeState extends State<Home> {
                 child: ReusableCard(
                   cardChild: ReusableCardContent(
                     icon: Icons.account_box_rounded,
-                    label: 'Gender Main Streaming and Directorate Center',
+                    label: 'Gender Main \n Streaming and \n Directorate Center',
                   ),
                   action: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (BuildContext context) => GenderScreen(),
                       ),
+                      (Route<dynamic> route) => true,
                     );
                   },
+                ),
+              ),
+              Expanded(
+                child: ReusableCard(
+                  cardChild: ReusableCardContent(
+                    icon: Icons.local_hospital_rounded,
+                    label: 'Mental Health Counsellors',
+                  ),
+                  // action: () {
+                  //   Navigator.of(context).push(
+                  //     MaterialPageRoute(
+                  //       builder: (BuildContext context) => GenderScreen(),
+                  //     ),
+                  //   );
+                  // },
                 ),
               )
             ],
@@ -95,36 +113,33 @@ class _HomeState extends State<Home> {
     );
   }
 
+  List carouselimages = [
+    "assets/images/image1.jpg",
+    "assets/images/image2.jpg",
+    "assets/images/image3.gif"
+  ];
+
   timelyUpdates() {
-    return Container(
-        child: CarouselSlider(
+    return CarouselSlider.builder(
+      itemCount: carouselimages.length,
+      itemBuilder: (BuildContext context, int itemIndex, _) => Container(
+        padding: EdgeInsets.all(20),
+        child: Image.asset(
+          carouselimages[itemIndex],
+          fit: BoxFit.fill,
+          width: double.infinity,
+        ),
+      ),
       options: CarouselOptions(
-        height: 200,
+        height: 400,
         scrollDirection: Axis.horizontal,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
         autoPlayAnimationDuration: Duration(milliseconds: 800),
         autoPlayCurve: Curves.fastOutSlowIn,
+        initialPage: 0,
+        enlargeCenterPage: true,
       ),
-      items: [1, 2, 3].map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-              margin: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                // color: kappPrimary,
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: AssetImage("assets/images/guidancepic.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              height: 200.0,
-              width: MediaQuery.of(context).size.width * 0.9,
-            );
-          },
-        );
-      }).toList(),
-    ));
+    );
   }
 }

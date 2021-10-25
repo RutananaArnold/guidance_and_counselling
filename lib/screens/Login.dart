@@ -13,7 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController studentnoController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
   bool _shConfirmPass = true;
@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 70.0),
+            SizedBox(height: 50.0),
             Text(
               "Guidance and Counselling",
               style: TextStyle(
@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
                         MaterialPageRoute(
                           builder: (BuildContext context) => Register(),
                         ),
-                        (Route<dynamic> route) => false);
+                        (Route<dynamic> route) => true);
                   },
                 ),
               ),
@@ -68,14 +68,8 @@ class _LoginState extends State<Login> {
   //UI Components
   headerSection() {
     return Container(
-      height: 300.0,
-      child: Center(
-        child: Icon(
-          Icons.connect_without_contact_rounded,
-          color: Colors.black,
-          size: 150.0,
-        ),
-      ),
+      height: MediaQuery.of(context).size.height * 0.5,
+      child: Center(child: Image.asset("assets/images/Mak-Logo.png")),
     );
   }
 
@@ -83,9 +77,9 @@ class _LoginState extends State<Login> {
     return Column(
       children: [
         RoundedInputField(
-          hintText: "Email Address",
+          hintText: "Student Number",
           icon: Icons.mail_outline,
-          field: emailController,
+          field: studentnoController,
           fcolor: Colors.white70,
           onChanged: (value) {},
           validate: (value) {},
@@ -118,7 +112,8 @@ class _LoginState extends State<Login> {
             text: "SIGN IN",
             color: kappFailed,
             press: () {
-              if (emailController.text == "" || passwordController.text == "") {
+              if (studentnoController.text == "" ||
+                  passwordController.text == "") {
                 Flushbar(
                   message: "Empty field/s found!",
                   icon: Icon(Icons.info_outline, size: 25.0, color: Colors.red),

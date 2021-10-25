@@ -17,7 +17,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController fnameController = new TextEditingController();
   final TextEditingController lnameController = new TextEditingController();
-  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController studentnoController = new TextEditingController();
   final TextEditingController passController = new TextEditingController();
   final TextEditingController passConfController = new TextEditingController();
 
@@ -113,8 +113,8 @@ class _RegisterState extends State<Register> {
     return Column(
       children: [
         RoundedInputField(
-          hintText: "Email Address",
-          field: emailController,
+          hintText: "Student Number",
+          field: studentnoController,
           fcolor: Colors.white70,
           icon: Icons.mail_outline,
           onChanged: (value) {},
@@ -191,7 +191,7 @@ class _RegisterState extends State<Register> {
             press: () {
               if (fnameController.text == '' ||
                   lnameController.text == '' ||
-                  emailController.text == '' ||
+                  studentnoController.text == '' ||
                   tel == '' ||
                   passController.text == '' ||
                   passConfController.text == '') {
@@ -216,7 +216,7 @@ class _RegisterState extends State<Register> {
                       MaterialPageRoute(
                         builder: (BuildContext context) => Login(),
                       ),
-                      (Route<dynamic> route) => true);
+                      (Route<dynamic> route) => false);
                 }
               }
             },

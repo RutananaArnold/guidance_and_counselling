@@ -70,8 +70,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   ),
                 ),
-                Icon(
-                  Icons.settings,
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.phone),
                   color: Colors.black54,
                 ),
               ],
